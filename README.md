@@ -33,6 +33,8 @@ APB-side signals (PSEL, PENABLE, PWRITE, PADDR, PWDATA, PRDATA) were checked
 on the waveform viewer to confirm correct protocol translation across the
 IDLE → SETUP → ACCESS states.
 
+![Simulation Waveform](simulation_waveform.png)
+
 ## Tools Used
 
 - **HDL:** Verilog
@@ -41,7 +43,7 @@ IDLE → SETUP → ACCESS states.
 ## How to Simulate
 
 1. Open `AHB2APB.xpr` in Vivado
-2. Set the testbench as the simulation top module
+2. Set `tb.v` as the simulation top module
 3. Run Behavioral Simulation
 4. Add signals to the waveform viewer and inspect the AHB-to-APB conversion
 5. Run Synthesis to generate the synthesized netlist
