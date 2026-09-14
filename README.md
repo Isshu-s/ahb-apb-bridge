@@ -1,8 +1,7 @@
 # AMBA AHB-to-APB Bridge in Verilog
 
 A synthesizable AHB-to-APB bridge designed from scratch in Verilog and verified
-in AMD Vivado. Built as a portfolio project targeting RTL/frontend VLSI
-internships. The bridge converts AHB-Lite master transactions into APB
+in AMD Vivado. The bridge converts AHB-Lite master transactions into APB
 peripheral transactions per the ARM AMBA specification.
 
 ## Architecture
