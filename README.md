@@ -1,49 +1,60 @@
-Yep, that works fine. Click **Add a README**, then paste this in:
+# AMBA AHB-to-APB Bridge in Verilog
 
-```markdown
-# AMBA AHB-to-APB Bridge Design and Verification using Verilog & Vivado
+A synthesizable AHB-to-APB bridge designed from scratch in Verilog and verified
+in AMD Vivado. Built as a portfolio project targeting RTL/frontend VLSI
+internships. The bridge converts AHB-Lite master transactions into APB
+peripheral transactions per the ARM AMBA specification.
 
-Designed and verified a synthesizable AMBA AHB-to-APB bridge using Verilog HDL in AMD Vivado. The bridge converts AHB read/write transactions into APB transactions using an AHB Slave Interface, APB FSM Controller, and APB Interface. Developed a Verilog testbench to generate single read/write transactions, verified the AHB-to-APB data/address/control signal conversion through behavioral simulation and waveforms, and successfully completed RTL synthesis in Vivado.
+## Architecture
 
-## Features
+AHB Master → AHB Slave Interface → APB FSM Controller → APB Interface → APB Peripheral
 
-- **AHB Slave Interface** — receives AHB-Lite master transactions (address, control, write data)
-- **APB FSM Controller** — sequences IDLE → SETUP → ACCESS states per the AMBA APB protocol
-- **APB Interface** — drives PSEL, PENABLE, PWRITE, PADDR, PWDATA and samples PRDATA/PREADY
-- Supports single AHB read and write transactions, converted to corresponding APB transactions
-- Verilog testbench generating directed read/write stimulus
-- Verified via behavioral simulation with waveform inspection
-- RTL synthesized successfully in Vivado
+The bridge implements a complete AHB-to-APB datapath: an AHB Slave Interface
+captures address/control/write-data from the AHB master, an APB FSM Controller
+sequences the IDLE → SETUP → ACCESS states, and an APB Interface drives the
+resulting PSEL/PENABLE/PWRITE/PADDR/PWDATA signals and samples PRDATA/PREADY.
 
-## Tools & Technologies
+## Modules
+
+| Module               | File                     | Description                                          |
+|-----------------------|--------------------------|-------------------------------------------------------|
+| AHB Master            | AHB_Master.v             | Generates AHB-Lite read/write transactions            |
+| AHB Slave Interface   | AHB_Slave_Interface.v    | Captures AHB address, control, and write-data signals |
+| APB Controller (FSM)  | APB_Controller.v         | IDLE → SETUP → ACCESS state machine per APB protocol  |
+| APB Interface         | APB_Interface.v          | Drives PSEL/PENABLE/PWRITE/PADDR/PWDATA, samples PRDATA/PREADY |
+| Bridge Top            | bridge_top.v             | Full integration of all modules                       |
+
+## Simulation Results
+
+All modules verified via behavioral simulation in Vivado.
+
+### AHB-to-APB Write Transaction
+*(waveform screenshot here)*
+
+### AHB-to-APB Read Transaction
+*(waveform screenshot here)*
+
+## Tools Used
 
 - **HDL:** Verilog
 - **Simulation & Synthesis:** AMD Vivado
 
-## Repository Structure
+## How to Simulate
 
-```
-.
-├── AHB2APB.xpr
-├── AHB_Master.v
-├── AHB_Slave_Interface.v
-├── APB_Controller.v
-├── APB_Interface.v
-├── bridge_top.v
-└── README.md
-```
+1. Open `AHB2APB.xpr` in Vivado
+2. Add the testbench as the simulation top module
+3. Run Behavioral Simulation
+4. Add signals to the waveform viewer and inspect AHB-to-APB conversion
+5. Run Synthesis to generate the synthesized netlist
 
-## Getting Started
+## Key Concepts Demonstrated
 
-1. Clone the repository
-   ```bash
-   git clone https://github.com/Isshu-s/ahb-apb-bridge.git
-   ```
-2. Open `AHB2APB.xpr` in Vivado
-3. Run behavioral simulation to view AHB-to-APB signal conversion on waveforms
-4. Run synthesis to generate the synthesized netlist
+- RTL design and simulation workflow
+- AMBA AHB-Lite and APB protocol conversion
+- FSM-based bus bridge design
+- Single-cycle AHB transaction to two-cycle APB transaction (SETUP/ACCESS) mapping
+- Signal-level protocol compliance verification
 
-## Status
+## Author
 
-RTL design complete, testbench verified via simulation, and synthesis completed in Vivado.
-```
+[github.com/Isshu-s](https://github.com/Isshu-s)
