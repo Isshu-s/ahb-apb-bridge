@@ -1,5 +1,5 @@
 
-// AHB to APG Bridge 
+// AHB to APb Bridge 
 //
 //
 //
