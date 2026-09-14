@@ -1,12 +1,10 @@
 
-// AHB to APG Bridge 
+// AHB to APB Bridge 
 //
 //
 //
 // AHB Slave Interface
 //
-//
-// Modifications: The Combinational part sensitivity list did not inclued Hresetn and hence they gave x output on reset
 
 
 module AHB_slave_interface(Hclk,Hresetn,Hwrite,Hreadyin,Htrans,Haddr,Hwdata,
